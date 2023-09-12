@@ -63,6 +63,11 @@
   resolved "https://registry.yarnpkg.com/@heroicons/react/-/react-2.0.18.tgz#f80301907c243df03c7e9fd76c0286e95361f7c1"
   integrity sha512-7TyMjRrZZMBPa+/5Y8lN0iyvUU/01PeMGX2+RE7cQWpEUIcb4QotzUObFkJDejj/HUH4qjP/eQ0gzzKs2f+6Yw==
 
+"@huggingface/inference@^2.6.1":
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/@huggingface/inference/-/inference-2.6.1.tgz#d11f4c44d824e92577ec460c6ff60474ef36467d"
+  integrity sha512-qFYchgOCPeEkZJKiSr7Kz62QwukJtgkeQCT7Q0SSKUcvHpTQVNJp6i/JrJMR4dBdzQysJ1SZDC0pLBBnnskTag==
+
 "@humanwhocodes/config-array@^0.11.10":
   version "0.11.11"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.11.11.tgz#88a04c570dbbc7dd943e4712429c3df09bc32844"
@@ -2191,11 +2196,6 @@ regexp.prototype.flags@^1.5.0:
     call-bind "^1.0.2"
     define-properties "^1.2.0"
     functions-have-names "^1.2.3"
-
-replicate@^0.16.0:
-  version "0.16.1"
-  resolved "https://registry.yarnpkg.com/replicate/-/replicate-0.16.1.tgz#8a096c7e91f6fc3630025efdba9b5e6f521b2d21"
-  integrity sha512-7GlY2IRJd4CwXLSO+eTNCRjYFlT10pgHQjYnwCBczr4+qdErIZp4sAEuRFfhzXNU3Bi+sYJJLpcddnUOFxStNg==
 
 resolve-from@^4.0.0:
   version "4.0.0"

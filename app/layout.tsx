@@ -3,7 +3,7 @@ import { Analytics } from "@vercel/analytics/react";
 import "../styles/globals.css";
 
 export const metadata: Metadata = {
-  title: "Simple2B Chat",
+  title: "Smart Chat",
 };
 
 export default function RootLayout({

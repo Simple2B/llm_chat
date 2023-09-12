@@ -15,19 +15,8 @@ const MAX_TOKENS: number = 4096;
 
 const MODELS: Model[] = [
   {
-    name: "Model 7B",
-    version: "v7",
-    shortened: "7B",
-  },
-  {
-    name: "Model 13B",
-    version: "v13",
-    shortened: "13B",
-  },
-  {
-    name: "Model 70B",
-    version: "v70",
-    shortened: "70B",
+    name: "Smart Assistant",
+    version: "OpenAssistant/oasst-sft-4-pythia-12b-epoch-3.5",
   },
 ];
 
@@ -42,23 +31,20 @@ const HomePage = () => {
   const [error, setError] = useState(null);
 
   // Model params
-  const [model, setModel] = useState(MODELS[0]); // default to 7B
+  const [model, setModel] = useState(MODELS[0]);
   const [systemPrompt, setSystemPrompt] = useState("You are a helpful chat.");
   const [temp, setTemp] = useState(0.75);
   const [topP, setTopP] = useState(0.9);
   const [maxTokens, setMaxTokens] = useState(800);
 
   const { complete, completion, setInput, input, isLoading } = useCompletion({
-    api: "/api/streaming",
+    api: "/api/completion",
     body: {
       model: model.version,
       systemPrompt: systemPrompt,
       temperature: temp,
       topP: topP,
       maxTokens: maxTokens,
-    },
-    onResponse: (res) => {
-      console.log({ res });
     },
     onError: (error) => {
       setError(error);
@@ -70,7 +56,6 @@ const HomePage = () => {
   };
 
   const handleSettingsSubmit = async (event): Promise<void> => {
-    console.log("Settings Submit EVENT", event);
     event.preventDefault();
     setOpen(false);
     setSystemPrompt(event.target.systemPrompt.value);
@@ -98,11 +83,8 @@ const HomePage = () => {
       isUser: true,
     });
 
-    console.log({ messageHistory });
-
     // Generate initial prompt and calculate tokens
     let prompt: string = `${generatePrompt(messageHistory)}\n`;
-    console.log({ prompt });
 
     // Check if we exceed max tokens and truncate the message history if so.
     while (approximateTokenCount(prompt) > MAX_TOKENS) {
@@ -112,7 +94,6 @@ const HomePage = () => {
         );
         return;
       }
-
       // Remove the third message from history, keeping the original exchange.
       messageHistory.splice(1, 2);
 
@@ -132,23 +113,23 @@ const HomePage = () => {
 
   return (
     <>
-      <nav className="grid grid-cols-2 pt-3 pl-6 pr-3 sm:grid-cols-3 sm:pl-0">
+      <nav className="fixed top-0 left-0 right-0 z-10 grid grid-cols-2 py-3 pl-6 pr-3 sm:grid-cols-3 sm:pl-0 bg-white shadow-md">
         <div className="hidden sm:inline-block"></div>
         <div className="font-semibold text-gray-500 sm:text-center">
-          <span className="hidden sm:inline-block"> Simple2B Chat with</span>{" "}
+          <span className="hidden sm:inline-block">Chat with</span>{" "}
           <button
-            className="py-2 font-semibold text-rose-fog-600 hover:underline"
+            className="py-2 font-semibold text-bright-turquoise-600 hover:underline"
             onClick={() => setOpen(true)}>
-            Model {model.shortened}
+            {model.name}
           </button>
         </div>
         <div className="flex justify-end">
           <button
             type="button"
-            className="inline-flex items-center px-3 py-2 text-sm font-semibold text-rose-fog-500 bg-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+            className="inline-flex items-center px-3 py-2 text-sm font-semibold text-bright-turquoise-500 bg-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
             onClick={() => setOpen(true)}>
             <Cog6ToothIcon
-              className="w-5 h-5 text-rose-fog-600 sm:mr-2 group-hover:text-gray-900"
+              className="w-5 h-5 text-bright-turquoise-600 sm:mr-2 group-hover:text-gray-900"
               aria-hidden="true"
             />{" "}
             <span className="hidden sm:inline">Settings</span>
@@ -156,7 +137,7 @@ const HomePage = () => {
         </div>
       </nav>
 
-      <main className="max-w-2xl pb-5 mx-auto mt-4 sm:px-4">
+      <main className="max-w-2xl pb-5 mx-auto mt-4 sm:px-4 pt-10">
         <div className="text-center"></div>
         {messages.length == 0 && (
           <EmptyState setPrompt={setAndSubmitPrompt} setOpen={setOpen} />
@@ -191,8 +172,8 @@ const HomePage = () => {
               isUser={message.isUser}
             />
           ))}
-          {isLoading && <LoadingChatLine />}
           <Message text={completion} isUser={false} />
+          {isLoading && <LoadingChatLine />}
           <div ref={bottomRef} />
         </article>
       </main>
