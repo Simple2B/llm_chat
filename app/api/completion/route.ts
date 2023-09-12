@@ -15,11 +15,7 @@ export const runtime = 'edge';
 
 export async function POST(req: Request) {
     try {
-        const { prompt, model, maxTokens, topP, temperature } = await req.json();
-
-        console.log("PROMPT: ", prompt);
-        console.log("MODEL: ", model);
-
+        const { prompt, model, maxTokens } = await req.json();
         const response = await Hf.textGenerationStream({
             model: model,
             inputs: `<|prompter|>${prompt}<|endoftext|><|assistant|>`,

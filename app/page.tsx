@@ -32,18 +32,12 @@ const HomePage = () => {
 
   // Model params
   const [model, setModel] = useState(MODELS[0]);
-  const [systemPrompt, setSystemPrompt] = useState("You are a helpful chat.");
-  const [temp, setTemp] = useState(0.75);
-  const [topP, setTopP] = useState(0.9);
   const [maxTokens, setMaxTokens] = useState(800);
 
   const { complete, completion, setInput, input, isLoading } = useCompletion({
     api: "/api/completion",
     body: {
       model: model.version,
-      systemPrompt: systemPrompt,
-      temperature: temp,
-      topP: topP,
       maxTokens: maxTokens,
     },
     onError: (error) => {
@@ -58,7 +52,6 @@ const HomePage = () => {
   const handleSettingsSubmit = async (event): Promise<void> => {
     event.preventDefault();
     setOpen(false);
-    setSystemPrompt(event.target.systemPrompt.value);
   };
 
   const generatePrompt = (messages: MessageData[]): string => {
@@ -146,15 +139,9 @@ const HomePage = () => {
         <SlideOver
           open={open}
           setOpen={setOpen}
-          systemPrompt={systemPrompt}
-          setSystemPrompt={setSystemPrompt}
           handleSubmit={handleSettingsSubmit}
-          temp={temp}
-          setTemp={setTemp}
           maxTokens={maxTokens}
           setMaxTokens={setMaxTokens}
-          topP={topP}
-          setTopP={setTopP}
           models={MODELS}
           model={model}
           setModel={setModel}

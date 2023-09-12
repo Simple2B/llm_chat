@@ -10,12 +10,6 @@ import { Model } from "../types/model";
 interface Props {
   open: boolean;
   setOpen: (open: boolean) => void;
-  systemPrompt: string;
-  setSystemPrompt: (prompt: string) => void;
-  temp: number;
-  setTemp: (temp: number) => void;
-  topP: number;
-  setTopP: (topP: number) => void;
   maxTokens: number;
   setMaxTokens: (maxTokens: number) => void;
   models: Model[];
@@ -27,12 +21,6 @@ interface Props {
 const SlideOver = ({
   open,
   setOpen,
-  systemPrompt,
-  setSystemPrompt,
-  temp,
-  setTemp,
-  topP,
-  setTopP,
   maxTokens,
   setMaxTokens,
   models,
