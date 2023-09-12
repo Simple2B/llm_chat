@@ -9,6 +9,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      HUGGINGFACE_API_KEY: test_here
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
