@@ -40,6 +40,6 @@ fi
 # get current package version
 VERSION=$(node -p "require('./package.json').version")
 
-git commit -am v${VERSION} &&\
-git tag -a -m v${VERSION} v${VERSION} &&\
+git commit -am v${VERSION} && \
+git tag -a -m v${VERSION} v${VERSION} && \
 git push --follow-tags
