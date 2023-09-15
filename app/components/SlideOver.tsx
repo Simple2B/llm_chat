@@ -43,11 +43,13 @@ const SlideOver = ({
                 enterTo="translate-x-0"
                 leave="transform transition ease-in-out duration-500 sm:duration-700"
                 leaveFrom="translate-x-0"
-                leaveTo="translate-x-full">
+                leaveTo="translate-x-full"
+              >
                 <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
                   <form
                     onSubmit={(e) => handleSubmit(e)}
-                    className="flex h-full flex-col divide-y divide-gray-200 bg-white shadow-xl">
+                    className="flex h-full flex-col divide-y divide-gray-200 bg-white shadow-xl"
+                  >
                     <div className="h-0 flex-1 overflow-y-auto">
                       <div className="bg-bright-turquoise-700 px-4 py-6 sm:px-6">
                         <div className="flex items-center justify-between">
@@ -58,7 +60,8 @@ const SlideOver = ({
                             <button
                               type="button"
                               className="rounded-md bg-gray-700 text-gray-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
-                              onClick={() => setOpen(false)}>
+                              onClick={() => setOpen(false)}
+                            >
                               <span className="sr-only">Close panel</span>
                               <XMarkIcon
                                 className="h-6 w-6"
@@ -74,7 +77,8 @@ const SlideOver = ({
                             <div>
                               <label
                                 htmlFor="description"
-                                className="block font-bold text-sm leading-6 text-gray-900">
+                                className="block font-bold text-sm leading-6 text-gray-900"
+                              >
                                 Choose Model
                               </label>
                               <div className="">
@@ -95,7 +99,8 @@ const SlideOver = ({
                                       as={Fragment}
                                       leave="transition ease-in duration-100"
                                       leaveFrom="opacity-100"
-                                      leaveTo="opacity-0">
+                                      leaveTo="opacity-0"
+                                    >
                                       <Listbox.Options className="absolute mt-1 max-h-60 w-full shadow-md overflow-auto border-gray-700 rounded-md bg-white py-1 text-base ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                                         {models
                                           ? models.map(
@@ -112,7 +117,8 @@ const SlideOver = ({
                                                         : "text-gray-900"
                                                     }`
                                                   }
-                                                  value={model}>
+                                                  value={model}
+                                                >
                                                   {({ selected }) => (
                                                     <>
                                                       <span
@@ -120,7 +126,8 @@ const SlideOver = ({
                                                           selected
                                                             ? "font-medium"
                                                             : "font-normal"
-                                                        }`}>
+                                                        }`}
+                                                      >
                                                         {model.name}
                                                       </span>
                                                       {selected ? (
@@ -148,12 +155,14 @@ const SlideOver = ({
                             <div>
                               <label
                                 htmlFor="temperature"
-                                className="block text-sm font-bold leading-6 text-gray-900">
+                                className="block text-sm font-bold leading-6 text-gray-900"
+                              >
                                 Max Number of Tokens - {maxTokens}
                               </label>
                               <p
                                 className="mt-2 text-xs text-gray-500"
-                                id="temperature-description">
+                                id="temperature-description"
+                              >
                                 Maximum number of tokens to be generated (one
                                 word = 2-3 tokens)
                               </p>
@@ -169,6 +178,7 @@ const SlideOver = ({
                                   max="4096"
                                   step="1"
                                   name="maxTokens"
+                                  placeholder="Max Tokens"
                                   className="w-full h-1 bg-gray-100 accent-gray-500  rounded-lg appearance-none cursor-pointer"
                                 />
                               </div>
