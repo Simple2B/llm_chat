@@ -1,0 +1,11 @@
+# docker-compose for deployment
+version: '3.8'
+services:
+
+  site:
+    image: simple2b/llm-chat:latest
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - 127.0.0.1:${APP_LOCAL_PORT}:3000
