@@ -6,7 +6,7 @@ name: Bult & Deploy
 on:
   push:
     tags:
-      - "v*"
+      - "v*.*.*"
 
 env:
   DOCKER_LOGIN: simple2b
@@ -26,6 +26,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          # list of Docker images to use as base name for tags
+          images: |
+            ${{ env.IMAGE_NAME }}
+          # generate Docker tags based on the following events/attributes
+          tags: |
+            type=schedule
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=sha
       - name: Set Node.js 18.x
         uses: actions/setup-node@v3
         with:
@@ -55,9 +71,10 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          push: true
           platforms: linux/amd64,linux/arm64
-          tags: ${{ env.IMAGE_NAME }}:latest
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
       - name: update compose file
         uses: appleboy/scp-action@v0.1.4
         with:

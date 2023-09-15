@@ -1,5 +1,8 @@
 #!/bin/bash
 
+RED='\e[31m'
+RESET='\e[0m'
+
 # Ensure that the user has provided a valid argument
 case $1 in
     patch)
@@ -16,12 +19,11 @@ case $1 in
         ;;
 esac
 
-
-
 # Ensure that the working directory is clean
 if [[ $(git status -s) ]]
 then
-    echo "Working directory is not clean! Please commit all changes before running this script."
+    # print error message in red
+    printf "${RED}Working directory is not clean! Please commit all changes before running this script.${RESET}\n"
     exit 1
 fi
 
