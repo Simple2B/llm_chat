@@ -49,7 +49,7 @@ jobs:
           username: ${{ env.DEPLOY_USER_NAME }}
           key: ${{ env.DEPLOY_SSH_KEY }}
           source: docker-compose.dev.yaml
-          target: ~/site_dev
+          target: ${{ env.DEPLOY_WORK_DIR }}
       - name: deploy
         uses: appleboy/ssh-action@v0.1.10
         with:
@@ -57,7 +57,7 @@ jobs:
           username: ${{ env.DEPLOY_USER_NAME }}
           key: ${{ env.DEPLOY_SSH_KEY }}
           script: |
-            cd ~/site_dev &&
+            cd ${{ env.DEPLOY_WORK_DIR }} &&
             mv docker-compose.dev.yaml docker-compose.yaml &&
             docker-compose pull &&
             docker-compose up -d &&
